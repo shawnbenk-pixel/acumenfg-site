@@ -190,18 +190,20 @@ p{margin-bottom:1rem}
 
 /* menu rows */
 .co-list{list-style:none;margin:.6rem 0 0;border-top:1px solid var(--line)}
-.co-item{display:grid;grid-template-columns:96px minmax(0,1fr) auto;grid-template-areas:"img name price" "img build build" "img mac act";gap:2px 16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.co-item{display:grid;grid-template-columns:96px minmax(0,1fr) auto;grid-template-areas:"img name price" "img build build" "img foot foot";gap:2px 16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
 .co-pic{grid-area:img;width:96px;height:96px;object-fit:contain;align-self:center}
-.co-item h3{grid-area:name;margin:0;font-size:1.12rem}
+.co-name{grid-area:name;display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;min-width:0}
+.co-item h3{margin:0;font-size:1.12rem}
 .co-item>.co-price{grid-area:price;justify-self:end}
 .co-price{font:600 1.05rem var(--display);font-variant-numeric:tabular-nums}
 .co-build{grid-area:build;font-size:.9rem;color:var(--ink-soft);margin:0 0 8px;max-width:62ch}
-.co-mac{grid-area:mac;display:grid;grid-template-columns:repeat(4,max-content);gap:2px 16px;font-size:.86rem;color:var(--ink-soft);margin:0;font-variant-numeric:tabular-nums}
+.co-foot{grid-area:foot;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;min-width:0}
+.co-mac{display:flex;flex-wrap:wrap;gap:2px 16px;font-size:.86rem;color:var(--ink-soft);margin:0;font-variant-numeric:tabular-nums}
 .co-mac span{white-space:nowrap}
 .co-mac b{color:var(--ink);font-weight:800}
 .co-mac .pro,.co-mac .pro b{color:var(--teal)}
-.co-item-act{grid-area:act;display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
-.co-incart{font-size:.8rem;font-weight:800;color:var(--teal);white-space:nowrap}
+.co-item-act{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-left:auto}
+.co-incart{font-size:.76rem;font-weight:800;color:#fff;background:var(--teal);border-radius:999px;padding:2px 9px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .co-btn{font:600 .92rem var(--display);min-height:40px;padding:8px 18px;border-radius:999px;border:1.5px solid var(--blue);background:var(--blue);color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s,color .15s}
 .co-btn:hover{background:var(--aqua);border-color:var(--aqua)}
 .co-btn:active{transform:translateY(1px)}
@@ -385,9 +387,10 @@ html.co-lock{overflow:hidden}
   .co-done{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:620px){
-  .co-item{grid-template-columns:72px minmax(0,1fr) auto;grid-template-areas:"img name price" "img build build" "mac mac mac" "act act act";gap:2px 12px}
+  .co-item{grid-template-columns:72px minmax(0,1fr) auto;grid-template-areas:"img name price" "img build build" "foot foot foot";gap:2px 12px}
   .co-pic{width:72px;height:72px;align-self:start}
-  .co-mac{grid-template-columns:repeat(4,auto);justify-content:space-between;gap:2px 8px;margin-bottom:10px}
+  .co-foot{margin-top:8px}
+  .co-mac{width:100%;justify-content:space-between;gap:2px 8px}
   .co-btn{min-height:44px}
   .co-filter{flex-wrap:nowrap;overflow-x:auto;margin-right:calc(-1 * clamp(20px,4.5vw,56px));padding:0 20px 6px 0;scrollbar-width:none}
   .co-filter::-webkit-scrollbar{display:none}

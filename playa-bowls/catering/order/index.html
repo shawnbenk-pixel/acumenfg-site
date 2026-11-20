@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/playa-bowls/playa.css?v=20261119e">
+<link rel="stylesheet" href="/playa-bowls/playa.css?v=20261119f">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "@id": "https://acumenfg.com/playa-bowls/catering/order/", "url": "https://acumenfg.com/playa-bowls/catering/order/", "name": "Order Playa Bowls catering for your team", "description": "Bulk order builder for Playa Bowls Rogers bowls and smoothies, with per-item macros.", "about": {"@id": "https://acumenfg.com/playa-bowls/rogers/#restaurant"}, "inLanguage": "en-US", "isPartOf": {"@type": "WebSite", "name": "Acumen Franchise Group", "url": "https://acumenfg.com/"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://acumenfg.com/"}, {"@type": "ListItem", "position": 2, "name": "Playa Bowls", "item": "https://acumenfg.com/playa-bowls/"}, {"@type": "ListItem", "position": 3, "name": "Catering", "item": "https://acumenfg.com/playa-bowls/catering/"}, {"@type": "ListItem", "position": 4, "name": "Order", "item": "https://acumenfg.com/playa-bowls/catering/order/"}]}</script>
 </head>
@@ -258,11 +258,11 @@ function tabs(){$("#co-tabs").innerHTML=cats.map(function(c){return '<button typ
 function rowHTML(i){
   var v=viewOf(i), n=inCart(i.id), id=esc(i.id);
   var size=i.type==="smoothie"?'<span class="co-seg co-seg-sm" role="group" aria-label="Size of '+esc(i.name)+'">'+["16 oz","20 oz"].map(function(z){return '<label><input type="radio" name="rs-'+id+'" data-rsize="'+id+'" value="'+z+'"'+(v.size===z?" checked":"")+'><span>'+z+'</span></label>';}).join("")+'</span>':'';
-  return '<li class="co-item" data-item="'+id+'"><img class="co-pic" src="'+IMG+i.img+'" alt="" width="96" height="96" loading="lazy" decoding="async"><h3>'+esc(i.name)+'</h3><span class="co-price">'+money(v.price)+'</span>'+
-    '<p class="co-build">'+esc(i.build)+'</p><p class="co-mac">'+macCells(v.m)+'</p>'+
-    '<div class="co-item-act">'+(n?'<span class="co-incart">'+n+' in order</span>':'')+size+
+  return '<li class="co-item" data-item="'+id+'"><img class="co-pic" src="'+IMG+i.img+'" alt="" width="96" height="96" loading="lazy" decoding="async"><div class="co-name"><h3>'+esc(i.name)+'</h3>'+(n?'<span class="co-incart">'+n+' in order</span>':'')+'</div><span class="co-price">'+money(v.price)+'</span>'+
+    '<p class="co-build">'+esc(i.build)+'</p><div class="co-foot"><p class="co-mac">'+macCells(v.m)+'</p>'+
+    '<div class="co-item-act">'+size+
     '<button type="button" class="co-btn co-btn-line" data-cust="'+id+'" aria-label="Customize '+esc(i.name)+'">Customize</button>'+
-    '<button type="button" class="co-btn" data-add="'+id+'" aria-label="Add '+esc(i.name)+' to the order">Add</button></div></li>';
+    '<button type="button" class="co-btn" data-add="'+id+'" aria-label="Add '+esc(i.name)+' to the order">Add</button></div></div></li>';
 }
 function menu(){
   var list=D.items.filter(function(i){return q?(i.name+" "+i.build+" "+i.cat).toLowerCase().indexOf(q)>=0:(cat==="All"||i.cat===cat);});
