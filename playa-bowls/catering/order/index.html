@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/playa-bowls/playa.css?v=20261119c">
+<link rel="stylesheet" href="/playa-bowls/playa.css?v=20261119d">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "@id": "https://acumenfg.com/playa-bowls/catering/order/", "url": "https://acumenfg.com/playa-bowls/catering/order/", "name": "Order Playa Bowls catering for your team", "description": "Bulk order builder for Playa Bowls Rogers bowls and smoothies, with per-item macros.", "about": {"@id": "https://acumenfg.com/playa-bowls/rogers/#restaurant"}, "inLanguage": "en-US", "isPartOf": {"@type": "WebSite", "name": "Acumen Franchise Group", "url": "https://acumenfg.com/"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://acumenfg.com/"}, {"@type": "ListItem", "position": 2, "name": "Playa Bowls", "item": "https://acumenfg.com/playa-bowls/"}, {"@type": "ListItem", "position": 3, "name": "Catering", "item": "https://acumenfg.com/playa-bowls/catering/"}, {"@type": "ListItem", "position": 4, "name": "Order", "item": "https://acumenfg.com/playa-bowls/catering/order/"}]}</script>
 </head>
@@ -106,15 +106,26 @@
           </div>
 
           <div class="co-done" id="co-done" hidden>
-            <h2 id="co-done-h" tabindex="-1">Order sent</h2>
-            <p class="co-done-ref" id="co-done-ref"></p>
-            <p id="co-done-next"></p>
-            <div id="co-done-recap" class="co-done-recap"></div>
-            <div class="co-actions">
-              <button type="button" class="btn" id="co-done-print">Print a copy</button>
-              <button type="button" class="btn btn-line" id="co-done-new">Start a new order</button>
+            <div class="co-done-main">
+              <div class="co-done-head">
+                <span class="co-done-ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                <div><h2 id="co-done-h" tabindex="-1">Order sent</h2><p class="co-done-ref">Reference <b id="co-done-ref"></b></p></div>
+              </div>
+              <p class="co-done-lede" id="co-done-next"></p>
+              <h3>What happens next</h3>
+              <ol class="co-steps" id="co-done-steps"></ol>
+              <div class="co-actions">
+                <button type="button" class="btn" id="co-done-print">Print a copy</button>
+                <button type="button" class="btn btn-line" id="co-done-new">Start a new order</button>
+              </div>
+              <p class="small">Questions or changes: call <a href="tel:+14792787092">(479) 278-7092</a> or email <a href="mailto:info@acumenfg.com">info@acumenfg.com</a> with your reference.</p>
             </div>
-            <p class="small">Questions or changes: reply to our confirmation email or call <a href="tel:+14792787092">(479) 278-7092</a>.</p>
+            <aside class="co-done-card" aria-labelledby="co-done-oh">
+              <h3 id="co-done-oh">Your order</h3>
+              <dl class="co-facts" id="co-done-facts"></dl>
+              <ul class="co-rlines" id="co-done-recap"></ul>
+              <div class="co-rtotal" id="co-done-total"></div>
+            </aside>
           </div>
         </div>
 
@@ -532,12 +543,28 @@ function mailSend(lead){
   msg(lead+"Your email app should open with the order filled in. Press send there. If nothing opened, use Copy order and email it to "+EMAIL+".",true);
 }
 var sentQuote="";
+function clock(t){var p=t.split(":"), h=+p[0]; return ((h+11)%12+1)+":"+p[1]+" "+(h<12?"AM":"PM");}
 function done(j){
-  var f=form, T=totals();
+  var f=form, T=totals(), day=nice(new Date(f.date.value+"T12:00:00")), by=clock(f.time.value), del=f.mode.value==="Delivery";
   sentQuote=quoteHTML(j.ref);
-  $("#co-done-ref").textContent="Reference "+j.ref;
-  $("#co-done-next").textContent=plural(T.n,"item")+", "+money(T.sub)+" before sales tax, for "+nice(new Date(f.date.value+"T12:00:00"))+". We will confirm by email at "+f.email.value+" and send a Clover invoice. Nothing is charged until you pay the invoice.";
-  $("#co-done-recap").innerHTML=quoteTable();
+  $("#co-done-ref").textContent=j.ref;
+  $("#co-done-next").textContent="Thanks, "+f.name.value.trim().split(/\s+/)[0]+". The shop has your order for "+f.org.value.trim()+". Nothing is charged until you pay the invoice.";
+  $("#co-done-steps").innerHTML=
+    "<li>We check the order and confirm by email at <b>"+esc(f.email.value)+"</b>.</li>"+
+    "<li>We send a Clover invoice to that address. Pay by card from the invoice.</li>"+
+    "<li>"+(del?"We deliver to <b>"+esc(f.address.value)+"</b> for <b>"+by+"</b> on <b>"+esc(day)+"</b>.":"Your order is ready at the Rogers shop by <b>"+by+"</b> on <b>"+esc(day)+"</b>.")+"</li>";
+  $("#co-done-facts").innerHTML=
+    "<dt>Reference</dt><dd>"+esc(j.ref)+"</dd>"+
+    "<dt>Date</dt><dd>"+esc(day)+"</dd>"+
+    "<dt>Ready by</dt><dd>"+by+"</dd>"+
+    "<dt>"+(del?"Delivery":"Pickup")+"</dt><dd>"+(del?esc(f.address.value):"1803 S 46th Street, Suite 134, Rogers")+"</dd>";
+  $("#co-done-recap").innerHTML=cart.map(function(l){var t=tally(l), ml=modList(l);
+    return '<li><span class="q">'+l.qty+' &times;</span><div><b>'+esc(byId[l.id].name)+'</b>'+
+      (ml.length?'<p class="ch">'+esc(ml.join(", "))+'</p>':'')+
+      (l.label?'<p>Label: '+esc(l.label)+'</p>':'')+
+      '<p>'+macLine(t.m)+(l.qty>1?" each":"")+'</p></div>'+
+      '<span class="amt">'+money(t.price*l.qty)+(l.qty>1?'<small>'+money(t.price)+' each</small>':'')+'</span></li>';}).join("");
+  $("#co-done-total").innerHTML='<span>'+plural(T.n,"item")+'<small>Before sales tax. Tax is added on the invoice.</small></span><span class="t-big">'+money(T.sub)+'</span>';
   cart=[]; save(); render(); menu();
   co.classList.add("co-sent"); $("#co-done").hidden=false; bar.classList.remove("on"); document.body.classList.remove("co-bar-on");
   co.scrollIntoView({block:"start"}); $("#co-done-h").focus({preventScroll:true});
