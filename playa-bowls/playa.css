@@ -321,6 +321,8 @@ p{margin-bottom:1rem}
 .co-form .btn{cursor:pointer}
 .co-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .co-form .btn[disabled]{opacity:.6;cursor:progress}
+.co-actions .btn[hidden]{display:none}
+.co-cart[aria-busy="true"]{opacity:.6}
 
 /* order sent */
 .co-sent{grid-template-columns:minmax(0,1fr)}
