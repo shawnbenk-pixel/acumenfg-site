@@ -42,19 +42,20 @@
        "cocoa finish". Do not write flavor notes of our own here. List everything blended into a base, from
        the batch recipes in menu-build-specs.md (the banana base has honey; coconut is blended with banana).
        "blend" prints on the result card for the two bases that have no tile.
+       "strip" and "ink" are the header strip colors, the same ones the allergy register card uses.
        "contains" lists what is blended into the base and cannot come off.
        "pick" bases show on the base screen. "family" files a blend under a pick base. */
     bases: {
-      acai:    { name: "Acai", desc: "Brazilian Amazon berry. Tastes like blueberry with a hint of cacao.", color: "#4b2a63", photo: "8th-ave", pick: true, contains: [] },
-      pitaya:  { name: "Pitaya", desc: "Dragon fruit from Nicaragua. Tastes like strawberry kiwi.", color: "#e0218a", photo: "pink-flamingo", pick: true, contains: [] },
-      coconut: { name: "Coconut", desc: "Young organic coconut from Thailand, blended with banana.", color: "#efe8da", photo: "coco-bowl", pick: true, contains: ["banana"] },
-      mango:   { name: "Mango", desc: "Alphonso mangoes from India.", color: "#f7b52c", photo: "mango-berry", pick: true, contains: [] },
-      green:   { name: "Green", desc: "Kale, banana, pineapple and coconut milk.", color: "#7ab648", photo: "ocean-ave", pick: true, contains: ["banana", "pineapple"] },
-      banana:  { name: "Banana", desc: "Banana, honey and almond milk. Thick and creamy.", color: "#f1dc8c", photo: "olas-bowl", pick: true, contains: ["banana", "honey"] },
-      oatmeal: { name: "Oatmeal", desc: "Organic steel-cut oats. Served warm, no granola.", color: "#d9b98a", photo: null, pick: true, contains: [] },
-      cacao:   { name: "Cacao", desc: "Cacao and dates. Here through January 5.", color: "#5a3a2a", photo: null, pick: true, contains: [], until: "2027-01-05" },
-      cupid:   { name: "Stupid Cupid", blend: "strawberry, banana, coconut milk", color: "#f29bb5", family: "banana", contains: ["banana", "strawberry"] },
-      booster: { name: "Booster", blend: "banana, peanut butter, vanilla protein, flax oil, spirulina, cashew milk", color: "#9bb08a", family: "banana", contains: ["banana", "peanut_butter"] }
+      acai:    { name: "Acai", desc: "Brazilian Amazon berry. Tastes like blueberry with a hint of cacao.", color: "#4b2a63", strip: "#8d5bb5", ink: "#fff", photo: "8th-ave", pick: true, contains: [] },
+      pitaya:  { name: "Pitaya", desc: "Dragon fruit from Nicaragua. Tastes like strawberry kiwi.", color: "#e0218a", strip: "#e456da", ink: "#fff", photo: "pink-flamingo", pick: true, contains: [] },
+      coconut: { name: "Coconut", desc: "Young organic coconut from Thailand, blended with banana.", color: "#efe8da", strip: "#8feef8", photo: "coco-bowl", pick: true, contains: ["banana"] },
+      mango:   { name: "Mango", desc: "Alphonso mangoes from India.", color: "#f7b52c", strip: "#f6a23c", photo: "mango-berry", pick: true, contains: [] },
+      green:   { name: "Green", desc: "Kale, banana, pineapple and coconut milk.", color: "#7ab648", strip: "#c1ff72", photo: "ocean-ave", pick: true, contains: ["banana", "pineapple"] },
+      banana:  { name: "Banana", desc: "Banana, honey and almond milk. Thick and creamy.", color: "#f1dc8c", strip: "#fdfa2a", photo: "olas-bowl", pick: true, contains: ["banana", "honey"] },
+      oatmeal: { name: "Oatmeal", desc: "Organic steel-cut oats. Served warm, no granola.", color: "#d9b98a", strip: "#e5e1e2", photo: null, pick: true, contains: [] },
+      cacao:   { name: "Cacao", desc: "Cacao and dates. Here through January 5.", color: "#5a3a2a", strip: "#7b4a2d", ink: "#fff", photo: null, pick: true, contains: [], until: "2027-01-05" },
+      cupid:   { name: "Stupid Cupid", blend: "strawberry, banana, coconut milk", color: "#f29bb5", strip: "#ffbfb4", family: "banana", contains: ["banana", "strawberry"] },
+      booster: { name: "Booster", blend: "banana, peanut butter, vanilla protein, flax oil, spirulina, cashew milk", color: "#9bb08a", strip: "#ffbfb4", family: "banana", contains: ["banana", "peanut_butter"] }
     },
 
     /* Chips on the bowl screens. */

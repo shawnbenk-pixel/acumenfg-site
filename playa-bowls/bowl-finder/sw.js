@@ -1,12 +1,12 @@
 /* Bowl Finder offline cache. Bump V when files change so iPads pick up the new copy. */
 importScripts("menu.js");
-var V = "bowl-finder-v4";
+var V = "bowl-finder-v6";
 var photos = self.PLAYA_MENU.bowls.concat(self.PLAYA_MENU.smoothies)
   .map(function (i) { return i.photo; }).filter(Boolean)
   .map(function (p) { return "../img/menu/" + p + ".webp"; });
-var CORE = ["./", "index.html", "app.css?v=4", "menu.js?v=4", "finder.js?v=4", "app.js?v=4", "manifest.webmanifest",
+var CORE = ["./", "index.html", "app.css?v=6", "menu.js?v=6", "finder.js?v=6", "app.js?v=6", "manifest.webmanifest",
   "fonts/fredoka.woff2", "fonts/nunito.woff2", "icon-180.png", "icon-192.png", "icon-512.png",
-  "../img/playa-logo-192.png", "../img/playa-logo-320.png", "../img/three-bowls-hero.jpg", "../img/three-bowls-phone.jpg"].concat(photos);
+  "../img/playa-logo-320.png"].concat(photos);
 
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(V).then(function (c) {
