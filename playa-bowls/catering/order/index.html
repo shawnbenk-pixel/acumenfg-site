@@ -264,6 +264,10 @@ function addLine(line){
     var take=Math.min(line.qty,LIM.qty-c.qty); c.qty+=take; line.qty-=take; if(!line.qty) return c;}}}
   line.k=seq++; cart.push(line); return line;
 }
+// Google Analytics events. Item and price only, never customer fields.
+function ga(ev,p){if(typeof window.gtag==="function") window.gtag("event",ev,p);}
+function gaAdd(line,qty){var it=byId[line.id], pr=tally(line).price, x={item_id:it.id,item_name:it.name,price:pr,quantity:qty}; if(line.size) x.item_variant=line.size;
+  ga("add_to_cart",{currency:"USD",value:pr*qty,items:[x]});}
 // 0 when the line would fold into an existing one with room, else 1.
 function linesNeeded(line){if(line.label) return 1; for(var i=0;i<cart.length;i++) if(!cart[i].label&&sig(cart[i])===sig(line)&&cart[i].qty+line.qty<=LIM.qty) return 0; return 1;}
 function totals(){var n=0,sub=0; cart.forEach(function(l){n+=l.qty; sub+=tally(l).price*l.qty;}); return {n:n,sub:sub};}
@@ -471,8 +475,8 @@ $("#co-d-form").addEventListener("submit",function(e){
   if(editK!=null){var l=find(editK); if(l){l.size=draft.size; l.qty=draft.qty; l.label=draft.label; l.mods=draft.mods;}}
   else{
     var nm=names();
-    if(nm.length) nm.forEach(function(n){addLine({id:draft.id,size:draft.size,qty:1,label:n,mods:JSON.parse(JSON.stringify(draft.mods))});});
-    else{if(roster){draft.qty=1; draft.label="";} addLine(draft);}
+    if(nm.length){gaAdd(draft,nm.length); nm.forEach(function(n){addLine({id:draft.id,size:draft.size,qty:1,label:n,mods:JSON.parse(JSON.stringify(draft.mods))});});}
+    else{if(roster){draft.qty=1; draft.label="";} gaAdd(draft,draft.qty); addLine(draft);}
     if(it.type==="smoothie") sizeSel[it.id]=draft.size;
   }
   save(); render(); menu(); closeDlg(); cartMsg("");
@@ -490,7 +494,7 @@ document.addEventListener("click",function(e){
   if(b.dataset.add){var it=byId[b.dataset.add], line={id:it.id,qty:1,label:"",mods:{}};
     if(it.type==="smoothie") line.size=sizeSel[it.id]||"16 oz";
     var full=room(linesNeeded(line),1); if(full){cartMsg(full); say(full); return;}
-    addLine(line); save(); cartMsg("");
+    gaAdd(line,1); addLine(line); save(); cartMsg("");
     keep(function(){render(); menu();});
     var T=totals(); say(it.name+" added. "+plural(T.n,"item")+", "+money(T.sub)+"."); return;}
   var li=b.closest("[data-line]"); if(!li) return; var l=find(li.dataset.line); if(!l) return;
@@ -625,6 +629,7 @@ function printHTML(html){var p=document.querySelector(".co-print")||document.bod
 // It carries the same reference the endpoint would give, so the shop can spot a copy that also came through the page.
 function mailSend(lead,S,ref){
   S=S||snapshot(); ref=ref||"";
+  ga("catering_order_email",{currency:"USD",value:S.sub});
   var subj="Catering order"+(ref?" "+ref:"")+": "+S.ev.org+", "+S.ev.date, text=orderText(S,ref);
   var url="mailto:"+EMAIL+"?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(text);
   lead=lead?lead+" ":"";
@@ -646,7 +651,7 @@ function done(j,S){
   var ev=S.ev, day=nice(ev.date), by=clock(ev.time)+" Central", del=ev.mode==="Delivery";
   var sub=typeof j.subtotal==="number"?j.subtotal:S.sub, n=typeof j.items==="number"?j.items:S.n;
   sentQuote=quoteHTML(S,j.ref,sub);
-  if(typeof window.gtag==="function") window.gtag("event","generate_lead",{currency:"USD",value:sub});
+  ga("generate_lead",{currency:"USD",value:sub});
   $("#co-done-ref").textContent=j.ref;
   $("#co-done-next").textContent="Thanks, "+ev.name.split(/\s+/)[0]+". We have your order for "+ev.org+". You won't be charged until you pay the invoice.";
   $("#co-done-steps").innerHTML=
