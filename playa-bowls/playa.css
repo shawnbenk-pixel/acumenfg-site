@@ -280,6 +280,7 @@ p{margin-bottom:1rem}
 .co-totals:empty{display:none}
 .co-totals .t-row{display:flex;justify-content:space-between;align-items:baseline;font-weight:700}
 .co-totals .t-big{font:600 1.45rem var(--display);font-variant-numeric:tabular-nums}
+.co-totals .t-sm{font-weight:600;font-size:.92rem;color:var(--ink-soft);font-variant-numeric:tabular-nums;margin-bottom:4px}
 .co-totals p{font-size:.86rem;color:var(--ink-soft);margin:4px 0 0}
 .co-totals .co-need{color:var(--ink);font-weight:800;margin-top:8px}
 .co-next{display:none;margin-top:16px;width:100%;text-align:center;cursor:pointer}
