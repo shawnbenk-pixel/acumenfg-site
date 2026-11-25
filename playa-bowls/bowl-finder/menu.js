@@ -126,20 +126,28 @@
       { title: "Extra", keys: ["protein"], loveOnly: true }
     ],
 
+    /* Milks the register can swap. A guest who does not want "avoid" still gets a smoothie made with
+       that milk, with a line on the card to order it with "to". Clover rings it as Substitute Almond Milk. */
+    milkSwaps: {
+      coconut_milk: { avoid: "coconut", to: "almond_milk" }
+    },
+
     /* Smoothies. "in" is what is blended, in recipe order, for the card.
-       tags: what a guest would say it tastes of. traces: counts only for "don't want". */
+       tags: what a guest would say it tastes of. traces: counts only for "don't want", and takes the smoothie out.
+       milk: set when the milk is the only thing in the cup from its chip group, so a swap fixes it.
+       PB Chocolate Wave keeps coconut in traces: it also has coco whip. */
     smoothies: [
-      { name: "Acai Energy", photo: "s-acai-energy", color: "#4b2a63", in: ["banana", "strawberry", "acai", "coconut_milk"], tags: ["banana", "strawberry", "acai"], traces: ["coconut"] },
-      { name: "Pink Pitaya", photo: "s-pink-pitaya", color: "#e0218a", in: ["pitaya", "coconut_milk"], tags: ["pitaya"], traces: ["coconut"] },
-      { name: "Strawberry Banana", photo: "s-strawberry-banana", color: "#f29bb5", in: ["banana", "strawberry", "coconut_milk"], tags: ["banana", "strawberry"], traces: ["coconut"] },
-      { name: "Kowabunga", photo: "s-kowabunga", color: "#8a4f9e", in: ["banana", "strawberry", "blueberry", "coconut_milk"], tags: ["banana", "strawberry", "blueberry"], traces: ["coconut"] },
-      { name: "Aloha", photo: "s-aloha", color: "#f7c948", in: ["banana", "pineapple", "mango", "coconut_milk"], tags: ["banana", "pineapple", "mango"], traces: ["coconut"] },
-      { name: "Green", photo: "s-green", color: "#7ab648", in: ["kale", "banana", "pineapple", "coconut_milk"], tags: ["greens", "banana", "pineapple"], traces: ["coconut"] },
-      { name: "Dolce", photo: "s-dolce", color: "#b98a5e", in: ["banana", "chocolate_protein", "peanut_butter", "coconut_milk"], tags: ["banana", "chocolate", "peanut_butter", "protein"], traces: ["coconut"] },
+      { name: "Acai Energy", photo: "s-acai-energy", color: "#4b2a63", in: ["banana", "strawberry", "acai", "coconut_milk"], tags: ["banana", "strawberry", "acai"], traces: [], milk: "coconut_milk" },
+      { name: "Pink Pitaya", photo: "s-pink-pitaya", color: "#e0218a", in: ["pitaya", "coconut_milk"], tags: ["pitaya"], traces: [], milk: "coconut_milk" },
+      { name: "Strawberry Banana", photo: "s-strawberry-banana", color: "#f29bb5", in: ["banana", "strawberry", "coconut_milk"], tags: ["banana", "strawberry"], traces: [], milk: "coconut_milk" },
+      { name: "Kowabunga", photo: "s-kowabunga", color: "#8a4f9e", in: ["banana", "strawberry", "blueberry", "coconut_milk"], tags: ["banana", "strawberry", "blueberry"], traces: [], milk: "coconut_milk" },
+      { name: "Aloha", photo: "s-aloha", color: "#f7c948", in: ["banana", "pineapple", "mango", "coconut_milk"], tags: ["banana", "pineapple", "mango"], traces: [], milk: "coconut_milk" },
+      { name: "Green", photo: "s-green", color: "#7ab648", in: ["kale", "banana", "pineapple", "coconut_milk"], tags: ["greens", "banana", "pineapple"], traces: [], milk: "coconut_milk" },
+      { name: "Dolce", photo: "s-dolce", color: "#b98a5e", in: ["banana", "chocolate_protein", "peanut_butter", "coconut_milk"], tags: ["banana", "chocolate", "peanut_butter", "protein"], traces: [], milk: "coconut_milk" },
       { name: "The Dang", photo: "s-the-dang", color: "#cdb98a", in: ["banana", "wheatgrass", "cinnamon", "peanut_butter", "almond_milk"], tags: ["banana", "peanut_butter", "greens"], traces: [] },
       { name: "Booster", photo: "s-booster", color: "#9bb08a", in: ["banana", "vanilla_protein", "spirulina", "peanut_butter", "flax_oil", "cashew_milk"], tags: ["banana", "peanut_butter", "protein", "greens"], traces: [] },
-      { name: "Matcha", photo: "s-matcha", color: "#a9c66a", in: ["banana", "pineapple", "matcha", "coconut_milk"], tags: ["banana", "pineapple", "matcha"], traces: ["coconut"] },
-      { name: "Dolce Latte", photo: "s-dolce-latte", color: "#9a6b47", in: ["banana", "chocolate_protein", "peanut_butter", "cold_brew", "coconut_milk"], tags: ["banana", "chocolate", "peanut_butter", "coffee", "protein"], traces: ["coconut"] },
+      { name: "Matcha", photo: "s-matcha", color: "#a9c66a", in: ["banana", "pineapple", "matcha", "coconut_milk"], tags: ["banana", "pineapple", "matcha"], traces: [], milk: "coconut_milk" },
+      { name: "Dolce Latte", photo: "s-dolce-latte", color: "#9a6b47", in: ["banana", "chocolate_protein", "peanut_butter", "cold_brew", "coconut_milk"], tags: ["banana", "chocolate", "peanut_butter", "coffee", "protein"], traces: [], milk: "coconut_milk" },
       { name: "Coconut New Orleans", photo: "s-coconut-new-orleans", color: "#d8c3a0", in: ["banana", "coconut_base", "cacao_nibs", "cold_brew", "oat_milk"], tags: ["banana", "coconut", "coffee", "chocolate"], traces: [] },
 
       /* Cacao Chocolate Waves, November 3, 2026 to January 5, 2027 */

@@ -158,9 +158,11 @@
     var pills = s.in.map(function (k) {
       var tags = SMOOTHIE_TAG[k] || [k];
       var hit = tags.some(function (t) { return has(p.loved, t); });
-      return '<li class="' + (hit ? "hit" : "") + '">' + esc(label(k)) + "</li>";
+      return '<li class="' + (has(p.remove, k) ? "off" : (hit ? "hit" : "")) + '">' + esc(label(k)) + "</li>";
     }).join("");
-    var notes = p.add.length ? '<p class="more">Add ' + esc(F.sentenceList(p.add, M.labels)) + ".</p>" : "";
+    var notes = "";
+    if (p.swap) notes += '<p class="tell">Order it with ' + esc(label(p.swap.to)) + " in place of " + esc(label(p.swap.from)) + ".</p>";
+    if (p.add.length) notes += '<p class="more">Add ' + esc(F.sentenceList(p.add, M.labels)) + ".</p>";
     return { photo: photo(s.photo, s.name + " smoothie", [s.color]), name: s.name, strip: "Smoothie, 16 or 20 oz", why: "", bg: "#93d1ef", ink: "#303030", pills: pills, notes: notes };
   }
 

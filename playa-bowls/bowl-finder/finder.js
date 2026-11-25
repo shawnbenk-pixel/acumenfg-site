@@ -10,6 +10,8 @@
 
    Smoothies
    - Blended, so nothing comes off: a smoothie with anything the guest does not want is out.
+   - The one exception is the milk. If the only thing the guest does not want is the milk (menu.milkSwaps),
+     the smoothie stays in, costs 1, and the card says which milk to order it with.
    - Each liked flavor is worth 2. Ties go to menu order. */
 (function (root) {
   function toSet(list) {
@@ -125,9 +127,12 @@
       if (!live(s, today)) return;
       var all = s.tags.concat(s.traces || []);
       if (all.some(function (k) { return avoid[k]; })) return;
+      var rule = s.milk && (menu.milkSwaps || {})[s.milk];
+      var swap = rule && avoid[rule.avoid] ? { from: s.milk, to: rule.to } : null;
       var loved = s.tags.filter(function (k) { return love[k]; });
       var add = love.protein && s.tags.indexOf("protein") === -1 ? ["protein"] : [];
-      cands.push({ kind: "smoothie", item: s, index: index, score: 2 * loved.length, loved: loved, remove: [], add: add });
+      cands.push({ kind: "smoothie", item: s, index: index, score: 2 * loved.length - (swap ? 1 : 0), loved: loved,
+        remove: swap ? [swap.from] : [], swap: swap, add: add });
     });
 
     cands.sort(function (a, b) { return b.score - a.score || a.index - b.index; });
