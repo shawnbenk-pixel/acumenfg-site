@@ -184,7 +184,7 @@
     return '<div class="screen">' + top(title, "", n ? "Order by name at the register." : "") +
       '<main class="body">' + notes +
       (n ? '<div class="cards">' + cards + "</div>" : '<div class="empty">Go back and change a pick.</div>') + "</main>" +
-      '<footer class="foot"><button type="button" class="btn btn-white" data-act="back">Back</button>' +
+      '<footer class="foot foot-results"><button type="button" class="btn btn-white" data-act="back">Back</button>' +
       '<button type="button" class="btn btn-white" data-act="start" data-mode="' + other + '">Find a ' + other + "</button>" +
       '<p class="foot-note">Food allergy? Tell our team before you order.</p>' +
       '<button type="button" class="btn btn-next" data-act="reset">Start over</button></footer></div>';
@@ -196,6 +196,7 @@
     app.innerHTML = SCREENS[state.screen]();
     var body = app.querySelector(".body");
     if (body) body.scrollTop = 0;
+    window.scrollTo(0, 0);
   }
 
   function go(delta) {
@@ -236,9 +237,12 @@
     }
   });
 
+  /* The shop iPad goes back to the start for the next guest. A guest's own phone keeps their picks. */
+  var PHONE = window.matchMedia ? window.matchMedia("(max-width:700px),(max-height:500px)") : null;
   function resetIdle() {
     clearTimeout(idleTimer);
     idleTimer = setTimeout(function () {
+      if (PHONE && PHONE.matches) return;
       if (state.screen !== "start") { state = fresh(); render(); }
     }, IDLE_MS);
   }

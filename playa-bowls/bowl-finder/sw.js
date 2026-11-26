@@ -3,12 +3,12 @@
    the saved copy is used only when the network is down or slow. Photos and fonts come from the saved copy.
    Bump V and the ?v= numbers in index.html when files change. */
 importScripts("menu.js");
-var V = "bowl-finder-v10";
+var V = "bowl-finder-v11";
 var NET_WAIT_MS = 3000;
 var photos = self.PLAYA_MENU.bowls.concat(self.PLAYA_MENU.smoothies)
   .map(function (i) { return i.photo; }).filter(Boolean)
   .map(function (p) { return "../img/menu/" + p + ".webp"; });
-var CORE = ["./", "index.html", "app.css?v=10", "menu.js?v=10", "finder.js?v=10", "app.js?v=10", "manifest.webmanifest",
+var CORE = ["./", "index.html", "app.css?v=11", "menu.js?v=11", "finder.js?v=11", "app.js?v=11", "manifest.webmanifest",
   "fonts/fredoka.woff2", "fonts/nunito.woff2", "app-icon-152.png", "app-icon-167.png", "app-icon-180.png", "app-icon-192.png", "app-icon-512.png",
   "../img/playa-logo-320.png"].concat(photos);
 

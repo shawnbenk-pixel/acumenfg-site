@@ -2,7 +2,7 @@
    (franchise/playa-bowls/documents/marketing/gift-card-sign, .../operations/allergen-register-cards):
    blue ground with two soft glows, white outlined headline with a hard shadow, pink pill, white cards
    with a dark outline and a hard shadow, header strips in the base colors. Playa brand kit colors;
-   Fredoka and Nunito stand in for Waffle Soft and Sofia Pro. Built for an iPad, either way up. */
+   Fredoka and Nunito stand in for Waffle Soft and Sofia Pro. Built for an iPad, either way up; the phone rules are at the bottom. */
 @font-face{font-family:"Fredoka";src:url(fonts/fredoka.woff2) format("woff2");font-weight:300 700;font-display:swap}
 @font-face{font-family:"Nunito";src:url(fonts/nunito.woff2) format("woff2");font-weight:400 900;font-display:swap}
 
@@ -188,11 +188,114 @@ img{display:block;max-width:100%}
   .foot .btn-next{min-width:180px}
   .foot .btn{padding:0 24px}
 }
-@media (max-width:700px){
+/* ---------- phones ----------
+   A phone cannot fit a whole step in one view the way the iPad does. The screen scrolls as one page,
+   tiles and cards take their own height, and the buttons stay pinned to the bottom edge. */
+@media (max-width:700px),(max-height:500px){
+  :root{--pad:16px;--drop:4px;--r:16px}
   body{font-size:16px}
-  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .top .pill{display:none}
-  .btn{min-height:58px;font-size:1.15rem;padding:0 22px}
+  .screen{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:0;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  .body{flex:none;overflow:visible;padding-bottom:22px}
+  .foot{position:sticky;bottom:0;z-index:2;margin-top:auto;
+    padding:20px var(--pad) calc(12px + var(--drop) + env(safe-area-inset-bottom));
+    background:linear-gradient(to bottom,rgba(47,180,232,0) 0,var(--blue-deep) 18px)}
+  .btn{min-height:54px;font-size:1.12rem;padding:0 20px}
   .foot .btn-next{min-width:0}
-  .foot-note{display:none}
+
+  /* the white frame becomes a border, so it grows with the page if the page has to scroll */
+  .frame{display:none}
+  .home-inner{flex:1 0 auto;margin:8px;border:4px solid var(--white);border-radius:26px}
+
+  .tiles{flex:none;grid-auto-rows:auto;gap:12px}
+  .tile{min-height:0}
+  .tile[aria-pressed="true"]{outline-width:4px;outline-offset:1px}
+  .tile .strip{font-size:1.08rem;padding:6px 8px 7px 12px}
+  .tick{width:26px;height:26px;border-width:2px}
+  [aria-pressed="true"] .tick{background-size:16px}
+  .tile-photo{flex:none;height:92px;padding-top:8px}
+  .tile-photo img{max-height:none}
+  .disc{height:72px;border-width:6px}
+  .tile-desc{font-size:.88rem;padding:6px 10px 12px;min-height:0}
+
+  .groups{gap:16px}
+  .group-title{font-size:.95rem;margin-bottom:8px}
+  .chips{gap:10px 8px}
+  .chip{min-height:48px;font-size:1.08rem;padding:0 16px 0 12px;gap:8px}
+  .dot{width:18px;height:18px}
+
+  .cards{flex:none;grid-auto-rows:auto;align-items:start;gap:14px}
+  .card-photo{flex:none;height:120px;max-height:none;min-height:0}
+  .card-photo .disc{height:92px}
+  .notes{font-size:.98rem}
+  .empty{padding:40px 8%;font-size:1.4rem}
+}
+
+/* phone, upright */
+@media (max-width:700px){
+  .home-inner{grid-template-columns:1fr;grid-template-rows:none;grid-auto-rows:auto;align-content:center;justify-items:center;
+    gap:0;padding:22px 16px 24px;text-align:center}
+  .home-copy{display:contents}
+  .home-row{flex-direction:column;gap:8px}
+  .home-row .logo{width:clamp(68px,20vw,92px)}
+  .home .h{--hs:clamp(2.5rem,13.6vw,3.7rem);text-align:center}
+  .home .pill{margin-top:12px;font-size:1rem;padding:4px 18px 5px}
+  .home-sub{margin-top:10px;font-size:1.25rem}
+  .home-cta{order:2;flex-direction:column;flex-wrap:nowrap;width:100%;max-width:340px;gap:12px;margin-top:18px}
+  .home-cta .btn{width:100%;min-height:58px;font-size:1.25rem}
+  .home-fine{order:3;margin-top:14px;font-size:.92rem}
+  /* the three photos sit in a row above the buttons, and only when the screen is tall enough */
+  .stickers{order:1;display:none;align-items:flex-start;justify-content:center;width:auto;height:auto;max-width:none;max-height:none;
+    aspect-ratio:auto;margin-top:16px;padding-bottom:6px}
+  .sticker{position:static;flex:none;width:min(28vw,var(--sw,80px));margin:0 -4px;border-width:3px;box-shadow:0 5px 0 var(--ink)}
+  .sticker.s2{margin-top:12px}
+
+  .top{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px;align-items:center;padding-top:12px}
+  .top .logo{grid-row:1 / span 2;width:52px}
+  .top .pill{grid-column:2;grid-row:1;justify-self:start;margin:0 0 6px;font-size:.72rem;letter-spacing:1.2px;padding:2px 10px 3px;
+    border-width:2px;box-shadow:0 2px 0 var(--ink)}
+  .top .h{grid-column:2;grid-row:2;--hs:1.7rem}
+  .sub{font-size:1.05rem;padding-top:8px}
+
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+  .cards{grid-template-columns:1fr}
+  .card .strip{font-size:.95rem}
+  .best{font-size:.74rem;padding:2px 9px 3px}
+  .card-main{flex-direction:row;align-items:flex-start;text-align:left;gap:12px;padding:12px 14px 14px 10px}
+  .card-photo{flex:0 0 30%;height:auto}
+  .card-photo img{width:100%;height:auto;max-height:none}
+  .card-photo .disc{width:78%;height:auto}
+  .card-text{align-items:flex-start;flex:1;min-width:0}
+  .card h2{font-size:1.45rem;margin-top:0}
+  .ings{justify-content:flex-start;gap:6px;margin-top:8px}
+  .ings li{font-size:.92rem;padding:1px 10px 2px}
+  .card-notes{font-size:.95rem;margin-top:9px}
+
+  /* the note moves above the buttons so it is never dropped */
+  .foot{flex-wrap:wrap;gap:8px 10px}
+  .foot-note{order:-1;flex:0 0 100%;text-align:center;font-size:.88rem}
+  .foot-note:empty{display:none}
+  .foot-results .btn{flex:1 1 auto;padding:0 12px;font-size:1.02rem;white-space:nowrap}
+}
+@media (max-width:700px) and (min-height:640px){.stickers{display:flex}}
+@media (max-width:700px) and (min-height:720px){.stickers{--sw:104px}}
+@media (max-width:700px) and (min-height:800px){.stickers{--sw:120px;margin-top:22px}.home-cta{margin-top:24px}}
+@media (max-width:350px){.foot-results .btn{white-space:normal;line-height:1.05}}
+
+/* phone, on its side */
+@media (min-width:701px) and (max-height:500px){
+  .home-inner{padding:18px 30px}
+  .home-row .logo{width:80px}
+  .home .h{--hs:clamp(2.3rem,5.6vw,3rem)}
+  .home .pill{margin-top:10px;font-size:1rem;padding:4px 18px 5px}
+  .home-sub{margin-top:8px;font-size:1.15rem}
+  .home-cta{margin-top:12px;gap:10px;flex-wrap:nowrap}
+  .home-cta .btn{white-space:nowrap}
+  .home-fine{margin-top:10px;font-size:.9rem}
+  .stickers{max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);aspect-ratio:1/1.15}
+  .top{padding-top:10px}
+  .top .logo{width:48px}
+  .top .h{--hs:1.6rem}
+  .sub{font-size:1.02rem;padding-top:4px}
 }
