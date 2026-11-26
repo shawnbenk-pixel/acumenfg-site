@@ -11,7 +11,7 @@
       granola: "granola", coconut_flakes: "coconut flakes", cacao_nibs: "cacao nibs", almonds: "almonds",
       walnuts: "walnuts", goji: "goji berries", chia: "chia seeds", hemp: "hemp seeds",
       bee_pollen: "bee pollen", figs: "figs", mint: "mint", cinnamon: "cinnamon",
-      brown_sugar: "brown sugar", coco_whip: "coco whip",
+      brown_sugar: "brown sugar",
       honey: "honey", nutella: "Nutella", peanut_butter: "peanut butter", almond_butter: "almond butter",
       agave: "agave", maple: "maple syrup", white_chocolate: "white chocolate",
       protein: "protein",
@@ -19,7 +19,7 @@
       acai: "acai", pitaya: "pitaya", kale: "kale", matcha: "matcha", cold_brew: "cold brew",
       wheatgrass: "wheatgrass", spirulina: "spirulina", flax_oil: "flax oil",
       chocolate_protein: "chocolate protein", vanilla_protein: "vanilla protein",
-      coconut_base: "coconut base", cacao_base: "cacao base",
+      coconut_base: "coconut base",
       coconut_milk: "coconut milk", almond_milk: "almond milk", cashew_milk: "cashew milk", oat_milk: "oat milk",
       /* smoothie chip groups */
       chocolate: "chocolate", coffee: "coffee", greens: "greens", coconut: "coconut"
@@ -37,8 +37,7 @@
     },
 
     /* Bases. "desc" is corporate wording only. Source: the Bases section of Playa's pre-training courses
-       (franchise/playa-bowls/reference/playa-training-study-guide.md, transcribed Sept 13, 2026), and the
-       Cacao readiness package. Taste lines are Playa's. Acai reads "hint of cacao" on Shawn's word (Nov 21, 2026); the guide has
+       (franchise/playa-bowls/reference/playa-training-study-guide.md, transcribed Sept 13, 2026). Taste lines are Playa's. Acai reads "hint of cacao" on Shawn's word (Nov 21, 2026); the guide has
        "cocoa finish". Do not write flavor notes of our own here. List everything blended into a base, from
        the batch recipes in menu-build-specs.md (the banana base has honey; coconut is blended with banana).
        "blend" prints on the result card for the two bases that have no tile.
@@ -53,7 +52,6 @@
       green:   { name: "Green", desc: "Kale, banana, pineapple and coconut milk.", color: "#7ab648", strip: "#c1ff72", photo: "ocean-ave", pick: true, contains: ["banana", "pineapple"] },
       banana:  { name: "Banana", desc: "Banana, honey and almond milk. Thick and creamy.", color: "#f1dc8c", strip: "#fdfa2a", photo: "olas-bowl", pick: true, contains: ["banana", "honey"] },
       oatmeal: { name: "Oatmeal", desc: "Organic steel-cut oats. Served warm, no granola.", color: "#d9b98a", strip: "#e5e1e2", photo: null, pick: true, contains: [] },
-      cacao:   { name: "Cacao", desc: "Cacao and dates. Here through January 5.", color: "#5a3a2a", strip: "#7b4a2d", ink: "#fff", photo: null, pick: true, contains: [], until: "2027-01-05" },
       cupid:   { name: "Stupid Cupid", blend: "strawberry, banana, coconut milk", color: "#f29bb5", strip: "#ffbfb4", family: "banana", contains: ["banana", "strawberry"] },
       booster: { name: "Booster", blend: "banana, peanut butter, vanilla protein, flax oil, spirulina, cashew milk", color: "#9bb08a", strip: "#ffbfb4", family: "banana", contains: ["banana", "peanut_butter"] }
     },
@@ -112,11 +110,10 @@
       { name: "Oatmeal #2", photo: null, base: ["oatmeal"], on: ["strawberry", "blueberry", "almonds"] },
       { name: "Oatmeal #3", photo: null, base: ["oatmeal"], protein: "chocolate", on: ["banana", "peanut_butter"] },
       { name: "Oatmeal #4", photo: null, base: ["oatmeal"], on: ["maple", "brown_sugar"] },
-      { name: "Oatmeal #5", photo: null, base: ["oatmeal"], on: ["banana", "walnuts", "figs", "cinnamon"] },
+      { name: "Oatmeal #5", photo: null, base: ["oatmeal"], on: ["banana", "walnuts", "figs", "cinnamon"] }
 
-      /* Cacao Chocolate Waves, November 3, 2026 to January 5, 2027 */
-      { name: "Chocolate Coconut Joy", photo: null, base: ["cacao", "coconut"], until: "2027-01-05", on: ["banana", "walnuts", "nutella"] },
-      { name: "Chocolate Covered Strawberry", photo: null, base: ["cacao", "cupid"], until: "2027-01-05", on: ["strawberry", "banana", "coco_whip"] }
+      /* Cacao Chocolate Waves (Chocolate Coconut Joy, Chocolate Covered Strawberry, Triple Dark Wave,
+         PB Chocolate Wave) pulled November 26, 2026: the shop ran out of cacao base and is not reordering. */
     ],
 
     /* Chips on the smoothie screens. Each is a group; "tags" on a smoothie say which groups it hits. */
@@ -134,8 +131,7 @@
 
     /* Smoothies. "in" is what is blended, in recipe order, for the card.
        tags: what a guest would say it tastes of. traces: counts only for "don't want", and takes the smoothie out.
-       milk: set when the milk is the only thing in the cup from its chip group, so a swap fixes it.
-       PB Chocolate Wave keeps coconut in traces: it also has coco whip. */
+       milk: set when the milk is the only thing in the cup from its chip group, so a swap fixes it. */
     smoothies: [
       { name: "Acai Energy", photo: "s-acai-energy", color: "#4b2a63", in: ["banana", "strawberry", "acai", "coconut_milk"], tags: ["banana", "strawberry", "acai"], traces: [], milk: "coconut_milk" },
       { name: "Pink Pitaya", photo: "s-pink-pitaya", color: "#e0218a", in: ["pitaya", "coconut_milk"], tags: ["pitaya"], traces: [], milk: "coconut_milk" },
@@ -148,11 +144,7 @@
       { name: "Booster", photo: "s-booster", color: "#9bb08a", in: ["banana", "vanilla_protein", "spirulina", "peanut_butter", "flax_oil", "cashew_milk"], tags: ["banana", "peanut_butter", "protein", "greens"], traces: [] },
       { name: "Matcha", photo: "s-matcha", color: "#a9c66a", in: ["banana", "pineapple", "matcha", "coconut_milk"], tags: ["banana", "pineapple", "matcha"], traces: [], milk: "coconut_milk" },
       { name: "Dolce Latte", photo: "s-dolce-latte", color: "#9a6b47", in: ["banana", "chocolate_protein", "peanut_butter", "cold_brew", "coconut_milk"], tags: ["banana", "chocolate", "peanut_butter", "coffee", "protein"], traces: [], milk: "coconut_milk" },
-      { name: "Coconut New Orleans", photo: "s-coconut-new-orleans", color: "#d8c3a0", in: ["banana", "coconut_base", "cacao_nibs", "cold_brew", "oat_milk"], tags: ["banana", "coconut", "coffee", "chocolate"], traces: [] },
-
-      /* Cacao Chocolate Waves, November 3, 2026 to January 5, 2027 */
-      { name: "Triple Dark Wave", photo: null, color: "#5a3a2a", until: "2027-01-05", in: ["cacao_base", "coconut_base", "banana", "chocolate_protein", "nutella", "coconut_milk"], tags: ["chocolate", "coconut", "banana", "protein"], traces: [] },
-      { name: "PB Chocolate Wave", photo: null, color: "#6b4630", until: "2027-01-05", in: ["cacao_base", "banana", "peanut_butter", "chocolate_protein", "coco_whip", "coconut_milk"], tags: ["chocolate", "peanut_butter", "banana", "protein"], traces: ["coconut"] }
+      { name: "Coconut New Orleans", photo: "s-coconut-new-orleans", color: "#d8c3a0", in: ["banana", "coconut_base", "cacao_nibs", "cold_brew", "oat_milk"], tags: ["banana", "coconut", "coffee", "chocolate"], traces: [] }
     ]
   };
 

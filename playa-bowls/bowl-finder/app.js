@@ -10,7 +10,7 @@
   var SMOOTHIE_TAG = {
     chocolate_protein: ["chocolate", "protein"], vanilla_protein: ["protein"], kale: ["greens"],
     wheatgrass: ["greens"], spirulina: ["greens"], cold_brew: ["coffee"], coconut_base: ["coconut"],
-    cacao_base: ["chocolate"], cacao_nibs: ["chocolate"], nutella: ["chocolate"]
+    cacao_nibs: ["chocolate"], nutella: ["chocolate"]
   };
 
   function fresh() { return { screen: "start", mode: "bowl", bases: [], loves: [], avoids: [] }; }
